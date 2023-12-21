@@ -8,12 +8,12 @@ namespace MagicVilla.Data
 {
     public static class VillaStore
     {
-        public static List<VillaDto>  villaList= new List<VillaDto>
+        public static List<VillaDto>  VillaList = new List<VillaDto>
         {
-            new VillaDto{Id=1, Nombre= "Vista a las Tetas de la Fernada"},
-            new VillaDto{Id=2, Nombre= "Vista al Culo de la Maira"},
-            new VillaDto{Id=3, Nombre= "Vista al Cuerpazo de Camila"},
-            new VillaDto{Id=4, Nombre= "Vista a las tremendas Tetas de la Fernanda"}
+            new VillaDto{Id=1, Nombre= "Vista a las Tetas de la Fernada",Ocupantes=2,MetrosCuadrados=22},
+            new VillaDto{Id=2, Nombre= "Vista al Culo de la Maira",Ocupantes=3,MetrosCuadrados=33},
+            new VillaDto{Id=3, Nombre= "Vista al Cuerpazo de Camila",Ocupantes=1,MetrosCuadrados=11},
+            new VillaDto{Id=4, Nombre= "Vista a las tremendas Tetas de la Fernanda",Ocupantes=2,MetrosCuadrados=45}
         };
     }
 }
