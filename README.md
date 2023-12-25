@@ -41,3 +41,21 @@
 
 # Titulo  :   Logger Inyeccion de Dependencia
 # Minuto  :   1:40:43
+
+# Titulo  :   EntityFrameWork Core / Modelo de Base de datos
+# Minuto  :   1:44:13
+
+# Titulo  :   Paquetes NuGet para EntityFrameWork Core
+# Minuto  :   1:49:08
+
+# Titulo  :   MS SQL Server Nombre del Servidor
+# Minuto  :   1:51:51
+
+# Titulo  :   Cadena de Conexion DbSet Identity
+# Minuto  :   1:52:53
+
+# Titulo  :   Usar la Cadena de Conexion
+# Minuto  :   1:58:28
+
+# Titulo  :   Crear Base de datos y Tabla Villa
+# Minuto  :   2:03:12
