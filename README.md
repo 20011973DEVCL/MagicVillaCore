@@ -1,4 +1,6 @@
 # MagicVilla
+# Pertenece al curso de WebApis.Net - La Guia Completa
+# Video : 2 - Web APIs (NET 7) La Guia Completa (Crear y Consumir API)
 
 # Titulo  :   Primer EndPoint
 # Minuto  :   0:39:31
@@ -59,3 +61,15 @@
 
 # Titulo  :   Crear Base de datos y Tabla Villa
 # Minuto  :   2:03:12
+
+# Titulo  :   Alimentar Tabla Villa
+# Minuto  :   2:08:44
+
+# Titulo  :   Usar ApplicationDbContext en API Controller
+# Minuto  :   2:14:38
+
+# Titulo  :   AsNoTracking en Accion
+# Minuto  :   2:30:17
+
+# Titulo  :   Subir los cambios a GIT
+# Minuto  :   2:34:56

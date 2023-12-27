@@ -1,7 +1,9 @@
 using MagicVilla.Data;
 using MagicVilla.Models.Dto;
+using MagicVillaNetCore.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MagicVillaNetCore.Controllers
 {
@@ -10,9 +12,11 @@ namespace MagicVillaNetCore.Controllers
     public class VillaController : ControllerBase
     {
         private readonly ILogger<VillaController> _logger;
-        public VillaController(ILogger<VillaController> logger)
+        private readonly ApplicationDbContext _db;
+        public VillaController(ILogger<VillaController> logger, ApplicationDbContext db)
         {
             this._logger = logger;
+            this._db = db;
         }
 
         [HttpGet]
@@ -20,7 +24,7 @@ namespace MagicVillaNetCore.Controllers
         public ActionResult<IEnumerable<VillaDto>> GetVillas()
         {
             _logger.LogInformation("Obtener todas la villas");
-            return Ok(VillaStore.VillaList);
+            return Ok(_db.Villas.ToList());
         }
 
         [HttpGet("{id}", Name = "GetVilla")]
@@ -35,7 +39,7 @@ namespace MagicVillaNetCore.Controllers
                 return BadRequest();
             }
 
-            var villa = VillaStore.VillaList.FirstOrDefault(v=>v.Id==id);
+            var villa = _db.Villas.FirstOrDefault(v=>v.Id==id);
             if (villa==null)
             {
                 return NotFound();
@@ -55,7 +59,7 @@ namespace MagicVillaNetCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var villa = VillaStore.VillaList.FirstOrDefault(v=> v.Nombre.ToLower()== villaDto.Nombre.ToLower());
+            var villa = _db.Villas.FirstOrDefault(v=> v.Nombre.ToLower()== villaDto.Nombre.ToLower());
             if (villa!=null)
             {
                 ModelState.AddModelError("ValidacionDeNombres", "El nombre ingresado ya Existe");
@@ -71,8 +75,21 @@ namespace MagicVillaNetCore.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            villaDto.Id = VillaStore.VillaList.OrderByDescending(v => v.Id).FirstOrDefault().Id +1;
-            VillaStore.VillaList.Add(villaDto);
+
+            Villa modelo = new()
+            {
+                Nombre=villaDto.Nombre,
+                Detalle=villaDto.Detalle,
+                Tarifa = villaDto.Tarifa,
+                Ocupantes = villaDto.Ocupantes,
+                MetrosCuadrados = villaDto.MetrosCuadrados,
+                ImagenUrl = villaDto.ImagenUrl,
+                Amenidad = villaDto.Amenidad,
+                FechaCreacion = DateTime.Now
+            };
+            _db.Villas.Add(modelo);
+            _db.SaveChanges();
+
             return CreatedAtRoute("GetVilla", new { id = villaDto.Id}, villaDto);
         }
 
@@ -87,12 +104,14 @@ namespace MagicVillaNetCore.Controllers
                 return BadRequest();
             }
 
-            var villa= VillaStore.VillaList.FirstOrDefault(v=>v.Id == id);
+            var villa= _db.Villas.FirstOrDefault(v=>v.Id == id);
             if (villa==null)
             {
                 return NotFound();
             }
-            VillaStore.VillaList.Remove(villa);
+            _db.Villas.Remove(villa);
+            _db.SaveChanges();
+
             return NoContent();
         }
 
@@ -106,11 +125,26 @@ namespace MagicVillaNetCore.Controllers
                 return BadRequest();
             }
 
-            var villa= VillaStore.VillaList.FirstOrDefault(v=>v.Id == id);
-            villa.Nombre = villaDto.Nombre;
-            villa.Ocupantes = villaDto.Ocupantes;
-            villa.MetrosCuadrados = villaDto.MetrosCuadrados;
-            
+            // var villa= _db.VillaList.FirstOrDefault(v=>v.Id == id);
+            // villa.Nombre = villaDto.Nombre;
+            // villa.Ocupantes = villaDto.Ocupantes;
+            // villa.MetrosCuadrados = villaDto.MetrosCuadrados;
+
+            Villa modelo = new()
+            {
+                Id=villaDto.Id,
+                Nombre=villaDto.Nombre,
+                Detalle=villaDto.Detalle,
+                Tarifa = villaDto.Tarifa,
+                Ocupantes = villaDto.Ocupantes,
+                MetrosCuadrados = villaDto.MetrosCuadrados,
+                ImagenUrl = villaDto.ImagenUrl,
+                Amenidad = villaDto.Amenidad,
+                FechaActualizacion = DateTime.Now
+            };
+            _db.Update(modelo);
+            _db.SaveChanges();
+
             return NoContent();
         }
 
@@ -124,13 +158,46 @@ namespace MagicVillaNetCore.Controllers
                 return BadRequest();
             }
 
-            var villa= VillaStore.VillaList.FirstOrDefault(v=>v.Id == id);
-            patchDto.ApplyTo(villa, ModelState);
+            var villa= _db.Villas.AsNoTracking().FirstOrDefault(v=>v.Id == id);
+
+            VillaDto villaDto = new()
+            {
+                Id              = villa.Id,
+                Nombre          = villa.Nombre,
+                Detalle         = villa.Detalle,
+                Tarifa          = villa.Tarifa,
+                Ocupantes       = villa.Ocupantes,
+                MetrosCuadrados = villa.MetrosCuadrados,
+                ImagenUrl       = villa.ImagenUrl,
+                Amenidad        = villa.Amenidad
+            };
+
+            if (villa==null){
+                return BadRequest();
+            }
+
+            patchDto.ApplyTo(villaDto, ModelState);
             
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            Villa modelo = new()
+            {
+                Id              =   villaDto.Id,
+                Nombre          =   villaDto.Nombre,
+                Detalle         =   villaDto.Detalle,
+                Tarifa          =   villaDto.Tarifa,
+                Ocupantes       =   villaDto.Ocupantes,
+                MetrosCuadrados =   villaDto.MetrosCuadrados,
+                ImagenUrl       =   villaDto.ImagenUrl,
+                Amenidad        =   villaDto.Amenidad,
+                FechaActualizacion = DateTime.Now
+            };
+
+            _db.Update(modelo);
+            _db.SaveChanges();
 
             return NoContent();
         } 

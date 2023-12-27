@@ -64,6 +64,47 @@ namespace MagicVilla.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Villas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amenidad = "",
+                            Detalle = "Tiene las tremendas Tetas",
+                            FechaActualizacion = new DateTime(2023, 12, 27, 10, 29, 17, 435, DateTimeKind.Local).AddTicks(3780),
+                            FechaCreacion = new DateTime(2023, 12, 27, 10, 29, 17, 435, DateTimeKind.Local).AddTicks(3740),
+                            ImagenUrl = "",
+                            MetrosCuadrados = 50,
+                            Nombre = "Villa Fernanda",
+                            Ocupantes = 5,
+                            Tarifa = 200.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amenidad = "",
+                            Detalle = "Tiene una Cintura y un Culo",
+                            FechaActualizacion = new DateTime(2023, 12, 27, 10, 29, 17, 435, DateTimeKind.Local).AddTicks(3790),
+                            FechaCreacion = new DateTime(2023, 12, 27, 10, 29, 17, 435, DateTimeKind.Local).AddTicks(3790),
+                            ImagenUrl = "",
+                            MetrosCuadrados = 70,
+                            Nombre = "Villa Maira",
+                            Ocupantes = 7,
+                            Tarifa = 300.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amenidad = "",
+                            Detalle = "No se a cual de las 2 me Culiaria Primero",
+                            FechaActualizacion = new DateTime(2023, 12, 27, 10, 29, 17, 435, DateTimeKind.Local).AddTicks(3790),
+                            FechaCreacion = new DateTime(2023, 12, 27, 10, 29, 17, 435, DateTimeKind.Local).AddTicks(3790),
+                            ImagenUrl = "",
+                            MetrosCuadrados = 100,
+                            Nombre = "Villa Fernanda y Maira",
+                            Ocupantes = 7,
+                            Tarifa = 500.0
+                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,7 @@ using MagicVilla.Models.Dto;
 
 namespace MagicVilla.Data
 {
-    public static class VillaStore
+    public static class _db
     {
         public static List<VillaDto>  VillaList = new List<VillaDto>
         {
