@@ -73,3 +73,21 @@
 
 # Titulo  :   Subir los cambios a GIT
 # Minuto  :   2:34:56
+
+# Titulo  :   Separar los DTO para Crear y Actualizar
+# Minuto  :   2:37:17
+
+# Titulo  :   Metodos Async
+# Minuto  :   2:42:01
+
+# Titulo  :   Configuraar AutoMapper y Mapping Config
+# Minuto  :   2:48:00
+
+# Titulo  :   AutoMapper en Accion
+# Minuto  :   2:53:27
+
+# Titulo  :   Subir los cambios a GIT
+# Minuto  :   3:01:30
+
+# Titulo  :   Agregar Interfaz Villa Repositorio
+# Minuto  :   3:02:29
