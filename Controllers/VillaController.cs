@@ -2,6 +2,7 @@ using System.Xml.Schema;
 using AutoMapper;
 using MagicVilla.Data;
 using MagicVilla.Models.Dto;
+using MagicVilla.Repositorio.IRepositorio;
 using MagicVillaNetCore.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,17 @@ namespace MagicVillaNetCore.Controllers
     public class VillaController : ControllerBase
     {
         private readonly ILogger<VillaController> _logger;
-        private readonly ApplicationDbContext _db;
+
+        // # Titulo  :   Agregar Interfaz Villa Repositorio 2
+        // # Minuto  :   3:16:53
+        // private readonly ApplicationDbContext _db;
+        private readonly IVillaRepositorio _villaRepo;
         private readonly IMapper _mapper;
-        public VillaController(ILogger<VillaController> logger, ApplicationDbContext db, IMapper mapper)
+        public VillaController(ILogger<VillaController> logger, IVillaRepositorio villaRepo, IMapper mapper)
         {
             this._logger = logger;
-            this._db = db;
+            // this._db = db;
+            this._villaRepo = villaRepo;
             this._mapper = mapper;
         }
 
@@ -28,7 +34,8 @@ namespace MagicVillaNetCore.Controllers
         public async Task<ActionResult<IEnumerable<VillaDto>>> GetVillas()
         {
             _logger.LogInformation("Obtener todas la villas");
-            IEnumerable<Villa> villaList = await _db.Villas.ToListAsync();
+            // IEnumerable<Villa> villaList = await _db.Villas.ToListAsync();
+            IEnumerable<Villa> villaList = await _villaRepo.ObtenerTodos();
 
             return Ok(_mapper.Map<IEnumerable<VillaDto>>(villaList));
         }
@@ -45,7 +52,8 @@ namespace MagicVillaNetCore.Controllers
                 return BadRequest();
             }
 
-            var villa =await _db.Villas.FirstOrDefaultAsync(v=>v.Id==id);
+            // var villa =await _db.Villas.FirstOrDefaultAsync(v=>v.Id==id);
+            var villa = await _villaRepo.Obtener(v=>v.Id==id);
             if (villa==null)
             {
                 return NotFound();
@@ -65,7 +73,8 @@ namespace MagicVillaNetCore.Controllers
                 return BadRequest(ModelState);
             }
 
-            var villa = await _db.Villas.FirstOrDefaultAsync(v=> v.Nombre.ToLower()== createDto.Nombre.ToLower());
+            // var villa = await _db.Villas.FirstOrDefaultAsync(v=> v.Nombre.ToLower()== createDto.Nombre.ToLower());
+            var villa = await _villaRepo.Obtener(v=> v.Nombre.ToLower()== createDto.Nombre.ToLower());
             if (villa!=null)
             {
                 ModelState.AddModelError("ValidacionDeNombres", "El nombre ingresado ya Existe");
@@ -93,8 +102,11 @@ namespace MagicVillaNetCore.Controllers
             //     Amenidad = createDto.Amenidad,
             //     FechaCreacion = DateTime.Now
             // };
-            await _db.Villas.AddAsync(modelo);
-            await _db.SaveChangesAsync();
+
+            // Estas Lineas se comentan ya que ahora se implemento el uso de interfaces.
+            // await _db.Villas.AddAsync(modelo);
+            // await _db.SaveChangesAsync();
+            await _villaRepo.Crear(modelo);
 
             return CreatedAtRoute("GetVilla", new { id = modelo.Id}, modelo);
         }
@@ -110,13 +122,16 @@ namespace MagicVillaNetCore.Controllers
                 return BadRequest();
             }
 
-            var villa= await _db.Villas.FirstOrDefaultAsync(v=>v.Id == id);
+            // var villa= await _db.Villas.FirstOrDefaultAsync(v=>v.Id == id);
+            var villa= await _villaRepo.Obtener(v=>v.Id == id);
             if (villa==null)
             {
                 return NotFound();
             }
-            _db.Villas.Remove(villa);
-            await _db.SaveChangesAsync();
+            // Estas Lineas se comentan ya que ahora se implemento el uso de interfaces.
+            // _db.Villas.Remove(villa);
+            // await _db.SaveChangesAsync();
+            await _villaRepo.Remover(villa);
 
             return NoContent();
         }
@@ -146,8 +161,12 @@ namespace MagicVillaNetCore.Controllers
             //     Amenidad = villaDto.Amenidad,
             //     FechaActualizacion = DateTime.Now
             // };
-            _db.Update(modelo);
-            await _db.SaveChangesAsync();
+
+            // Estas Lineas se comentan ya que ahora se implemento el uso de interfaces.
+            // _db.Update(modelo);
+            // await _db.SaveChangesAsync();
+
+            await _villaRepo.ActualizarVilla(modelo);
 
             return NoContent();
         }

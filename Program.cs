@@ -1,5 +1,7 @@
 using MagicVilla;
 using MagicVilla.Data;
+using MagicVilla.Repositorio;
+using MagicVilla.Repositorio.IRepositorio;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(option => {
 });
 
 builder.Services.AddAutoMapper(typeof(MappingConfing));
+
+// # Titulo  :   Agregar Interfaz Villa Repositorio 2
+// # Minuto  :   3:16:53
+builder.Services.AddScoped<IVillaRepositorio, VillaRepositorio>();
 
 var app = builder.Build();
 

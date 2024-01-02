@@ -10,7 +10,6 @@ namespace MagicVillaNetCore.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Detalle { get; set; }
-        [Required]
         public double Tarifa { get; set; }
         public int Ocupantes { get; set; }
         public int MetrosCuadrados { get; set; }
