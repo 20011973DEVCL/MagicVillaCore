@@ -100,3 +100,10 @@
 
 # Titulo  :   Modelo Numero de Villa
 # Minuto  :   3:53:57
+
+# Titulo  :   Subir los cambios a GIT
+# Minuto  :   4:22:46
+
+# ---------------------------------------------------------
+# Pertenece al curso de Autentificación JWT en .Net Core
+# Video : #12 Programando un sistema de ventas real   Autentificación JWT en .Net Core

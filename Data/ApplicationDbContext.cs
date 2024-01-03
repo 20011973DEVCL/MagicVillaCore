@@ -16,6 +16,7 @@ namespace MagicVilla.Data
         }
         public DbSet<Villa> Villas {get; set;}
         public DbSet<NumeroVilla> NumeroVillas {get; set;}
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -69,6 +70,17 @@ namespace MagicVilla.Data
                     MetrosCuadrados=100,
                     Tarifa=500,
                     Amenidad="",
+                    FechaCreacion=DateTime.Now,
+                    FechaActualizacion=DateTime.Now
+                }
+            );
+
+            modelBuilder.Entity<Usuario>().HasData(
+                new Usuario()
+                {
+                    IdUsuario=1,
+                    NombreUsuario="Danilo Alarcon Lopez",
+                    Clave="123",
                     FechaCreacion=DateTime.Now,
                     FechaActualizacion=DateTime.Now
                 }

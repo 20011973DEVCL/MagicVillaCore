@@ -23,6 +23,8 @@ builder.Services.AddAutoMapper(typeof(MappingConfing));
 // # Minuto  :   3:16:53
 builder.Services.AddScoped<IVillaRepositorio, VillaRepositorio>();
 builder.Services.AddScoped<INumeroVillaRepositorio, NumeroVillaRepositorio>();
+// # Se aplica tabla Usuario para crear seguridad
+builder.Services.AddScoped<IUsuarioRepositorio,UsuarioRepositorio>();
 
 var app = builder.Build();
 
