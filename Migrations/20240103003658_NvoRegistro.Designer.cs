@@ -4,6 +4,7 @@ using MagicVilla.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicVilla.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240103003658_NvoRegistro")]
+    partial class NvoRegistro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,31 +24,6 @@ namespace MagicVilla.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("MagicVilla.Models.NumeroVilla", b =>
-                {
-                    b.Property<int>("VillaNo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DetalleEspecial")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("FechaActualizacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("VillaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("VillaNo");
-
-                    b.HasIndex("VillaId");
-
-                    b.ToTable("NumeroVillas");
-                });
 
             modelBuilder.Entity("MagicVillaNetCore.Models.Villa", b =>
                 {
@@ -96,8 +74,8 @@ namespace MagicVilla.Migrations
                             Id = 1,
                             Amenidad = "",
                             Detalle = "Tiene las tremendas Tetas",
-                            FechaActualizacion = new DateTime(2024, 1, 2, 21, 39, 17, 844, DateTimeKind.Local).AddTicks(7780),
-                            FechaCreacion = new DateTime(2024, 1, 2, 21, 39, 17, 844, DateTimeKind.Local).AddTicks(7650),
+                            FechaActualizacion = new DateTime(2024, 1, 2, 21, 36, 58, 333, DateTimeKind.Local).AddTicks(240),
+                            FechaCreacion = new DateTime(2024, 1, 2, 21, 36, 58, 333, DateTimeKind.Local).AddTicks(220),
                             ImagenUrl = "",
                             MetrosCuadrados = 50,
                             Nombre = "Villa Fernanda",
@@ -109,8 +87,8 @@ namespace MagicVilla.Migrations
                             Id = 2,
                             Amenidad = "",
                             Detalle = "Tiene una Cintura y un Culo",
-                            FechaActualizacion = new DateTime(2024, 1, 2, 21, 39, 17, 844, DateTimeKind.Local).AddTicks(7790),
-                            FechaCreacion = new DateTime(2024, 1, 2, 21, 39, 17, 844, DateTimeKind.Local).AddTicks(7780),
+                            FechaActualizacion = new DateTime(2024, 1, 2, 21, 36, 58, 333, DateTimeKind.Local).AddTicks(250),
+                            FechaCreacion = new DateTime(2024, 1, 2, 21, 36, 58, 333, DateTimeKind.Local).AddTicks(250),
                             ImagenUrl = "",
                             MetrosCuadrados = 70,
                             Nombre = "Villa Maira",
@@ -122,8 +100,8 @@ namespace MagicVilla.Migrations
                             Id = 3,
                             Amenidad = "",
                             Detalle = "No se a cual de las 2 me Culiaria Primero",
-                            FechaActualizacion = new DateTime(2024, 1, 2, 21, 39, 17, 844, DateTimeKind.Local).AddTicks(7790),
-                            FechaCreacion = new DateTime(2024, 1, 2, 21, 39, 17, 844, DateTimeKind.Local).AddTicks(7790),
+                            FechaActualizacion = new DateTime(2024, 1, 2, 21, 36, 58, 333, DateTimeKind.Local).AddTicks(250),
+                            FechaCreacion = new DateTime(2024, 1, 2, 21, 36, 58, 333, DateTimeKind.Local).AddTicks(250),
                             ImagenUrl = "",
                             MetrosCuadrados = 100,
                             Nombre = "Villa Fernanda y Maira",
@@ -135,25 +113,14 @@ namespace MagicVilla.Migrations
                             Id = 3000,
                             Amenidad = "",
                             Detalle = "Culiando a la Fernanda todo el Dia",
-                            FechaActualizacion = new DateTime(2024, 1, 2, 21, 39, 17, 844, DateTimeKind.Local).AddTicks(7790),
-                            FechaCreacion = new DateTime(2024, 1, 2, 21, 39, 17, 844, DateTimeKind.Local).AddTicks(7790),
+                            FechaActualizacion = new DateTime(2024, 1, 2, 21, 36, 58, 333, DateTimeKind.Local).AddTicks(260),
+                            FechaCreacion = new DateTime(2024, 1, 2, 21, 36, 58, 333, DateTimeKind.Local).AddTicks(260),
                             ImagenUrl = "",
                             MetrosCuadrados = 100,
                             Nombre = "Villa Danilo y Fernanda",
                             Ocupantes = 7,
                             Tarifa = 500.0
                         });
-                });
-
-            modelBuilder.Entity("MagicVilla.Models.NumeroVilla", b =>
-                {
-                    b.HasOne("MagicVillaNetCore.Models.Villa", "Villa")
-                        .WithMany()
-                        .HasForeignKey("VillaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Villa");
                 });
 #pragma warning restore 612, 618
         }

@@ -22,6 +22,7 @@ builder.Services.AddAutoMapper(typeof(MappingConfing));
 // # Titulo  :   Agregar Interfaz Villa Repositorio 2
 // # Minuto  :   3:16:53
 builder.Services.AddScoped<IVillaRepositorio, VillaRepositorio>();
+builder.Services.AddScoped<INumeroVillaRepositorio, NumeroVillaRepositorio>();
 
 var app = builder.Build();
 
