@@ -2,6 +2,7 @@ using MagicVilla;
 using MagicVilla.Data;
 using MagicVilla.Repositorio;
 using MagicVilla.Repositorio.IRepositorio;
+using MagicVilla.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,7 @@ builder.Services.AddScoped<IVillaRepositorio, VillaRepositorio>();
 builder.Services.AddScoped<INumeroVillaRepositorio, NumeroVillaRepositorio>();
 // # Se aplica tabla Usuario para crear seguridad
 builder.Services.AddScoped<IUsuarioRepositorio,UsuarioRepositorio>();
+builder.Services.AddScoped<IAutorizacionService, AutorizacionService>();
 
 var app = builder.Build();
 

@@ -106,4 +106,7 @@
 
 # ---------------------------------------------------------
 # Pertenece al curso de Autentificación JWT en .Net Core
-# Video : #12 Programando un sistema de ventas real   Autentificación JWT en .Net Core
+# Video : 01 - Autenticación JWT y Refresh Token en API REST   .NET CORE 7   ✅ Json Web Tokens ✅
+
+# Titulo  :   Configuracion de Servicios Implementacion JWT
+# Minuto  :   0:11:25
